@@ -15,5 +15,6 @@
 
 = Concrete Roadmap =
 
- # [http://www.refactoring.com/ refactor] and test Ahuva's code
- # integrate the two code bases
+ # [http://www.refactoring.com refactor] and test Ahuva's code
+ # Finish prototyping the engine
+ # Integrate the two code bases
