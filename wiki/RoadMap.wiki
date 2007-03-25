@@ -1,5 +1,6 @@
 #summary Project road map for the next few weeks
 
+= General Issues =
  * Optimizations
    * Defer to end of milestone
  * Unit testing
@@ -11,3 +12,8 @@
  * Additional features
    * More schedulers
    * Job input perturbations
+
+= Concrete Roadmap =
+
+ # [http://www.refactoring.com/ refactor] and test Ahuva's code
+ # integrate the two code bases
