@@ -1,0 +1,7 @@
+#summary Project road map for the next few weeks
+
+ * Optimizations
+ * Unit testing
+ * Synchronizing events
+ * Compare results with existing simulators
+ * Additional features
