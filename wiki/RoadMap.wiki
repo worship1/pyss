@@ -1,7 +1,13 @@
 #summary Project road map for the next few weeks
 
  * Optimizations
+   * Defer to end of milestone
  * Unit testing
- * Synchronizing events
+ * Integrate Ori's and Ahuva's code
+   * Synchronize events
+   * Using the same infrastructure (machine simulator, etc.)
  * Compare results with existing simulators
+   * As a sanity check
  * Additional features
+   * More schedulers
+   * Job input perturbations
