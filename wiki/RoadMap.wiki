@@ -1,20 +1,14 @@
 #summary Project road map for the next few weeks
 
-= General Issues =
- * Optimizations
-   * Defer to end of milestone
- * Unit testing
+=Roadmap=
+ * Finish initial prototype with a [StupidScheduling stupid scheduler]
  * Integrate Ori's and Ahuva's code
-   * Synchronize events
-   * Using the same infrastructure (machine simulator, etc.)
- * Compare results with existing simulators
-   * As a sanity check
- * Additional features
-   * More schedulers
-   * Job input perturbations
+ * Finish a simpler design for the ConservativeBackfilling scheduler
+ * Implement the EasyBackfilling scheduler with the new design
+ * Compare results with existing simulators (sanity check)
 
-= Concrete Roadmap =
+=Additional features=
+ * More schedulers
+ * Job input perturbations
 
- # [http://www.refactoring.com refactor] and test Ahuva's code
- # Finish prototyping the engine
- # Integrate the two code bases
+
