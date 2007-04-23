@@ -1,0 +1,22 @@
+#summary Performance notes
+
+Don't forget the [http://c2.com/cgi/wiki?RulesOfOptimization rules of optimization] :)
+
+These optimizations were all driven by profiler runs.
+
+= Current Performance =
+These values are current for r196, using '`trunk/prototype01/run_simulator.py`'
+
+TODO: fill these in
+
+ * Input file: sanitized LANL-CM5-1994-3.1-cln.swf.gz
+ * No. of job submissions: 110769
+ * Run time: 
+ * Jobs per second: 
+
+= Optimizations Done =
+ * parsing input fields lazily in `workload_parser.py`, only a few fields from the SWF format are used
+ * removing an assert in `EventQueue.add_event` (verified the event hasn't been entered before), it took almost %80 of the run time
+
+= TODO =
+It would be nice to keep slow asserts during development, and remove them only on "production" runs, e.g. with 'python -O' (assertions aren't evaluated).
