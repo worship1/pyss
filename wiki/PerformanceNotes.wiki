@@ -7,12 +7,12 @@ These optimizations were all driven by profiler runs.
 = Current Performance =
 These values are current for r196, using '`trunk/prototype01/run_simulator.py`'
 
-TODO: fill these in
+They were calculated with a 10%-busy-cpu 550Mhz Pentium III.
 
  * Input file: sanitized LANL-CM5-1994-3.1-cln.swf.gz
  * No. of job submissions: 110769
- * Run time: 
- * Jobs per second: 
+ * Run time: 26:09.67 minutes (1507 seconds)
+ * Jobs per second: 70
 
 = Optimizations Done =
  * parsing input fields lazily in `workload_parser.py`, only a few fields from the SWF format are used
