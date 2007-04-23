@@ -19,4 +19,4 @@ TODO: fill these in
  * removing an assert in `EventQueue.add_event` (verified the event hasn't been entered before), it took almost %80 of the run time
 
 = TODO =
-It would be nice to keep slow asserts during development, and remove them only on "production" runs, e.g. with 'python -O' (assertions aren't evaluated).
+It would be nice to keep slow asserts during development, and remove them only on "production" runs, e.g. with 'python -O' ([http://docs.python.org/ref/assert.html disables assertions]).
