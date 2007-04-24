@@ -11,12 +11,15 @@ They were calculated with a 10%-busy-cpu 550Mhz Pentium III.
 
  * Input file: sanitized LANL-CM5-1994-3.1-cln.swf.gz
  * No. of job submissions: 110769
- * Run time: 26:09.67 minutes (1507 seconds)
- * Jobs per second: 70
+ * Run time: 2:47.21 minutes (167 seconds)
+ * Jobs per second: 663
 
 = Optimizations Done =
- * parsing input fields lazily in `workload_parser.py`, only a few fields from the SWF format are used
- * removing an assert in `EventQueue.add_event` (verified the event hasn't been entered before), it took almost %80 of the run time
+ * Use a heap in `EventQueue` instead of a sorted list
+ * Parsing input fields lazily in `workload_parser.py`, only a few fields from the SWF format are used
+ * Running with '`python -O`' (which disables asserts)
+   * One assert was especially painful: verifying the event hasn't been entered before in `EventQueue.add_event`, it took almost %80 of the run time
+   * We may be interested in keeping most of the asserts even in a production run, how can we do this easily?
 
 = TODO =
 It would be nice to keep slow asserts during development, and remove them only on "production" runs, e.g. with 'python -O' ([http://docs.python.org/ref/assert.html disables assertions]).
