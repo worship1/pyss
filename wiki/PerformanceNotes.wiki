@@ -5,21 +5,25 @@ Don't forget the [http://c2.com/cgi/wiki?RulesOfOptimization rules of optimizati
 These optimizations were all driven by profiler runs.
 
 = Current Performance =
-These values are current for r211, using '`trunk/prototype01/run_simulator.py`'
 
-They were calculated with a 10%-busy-cpu 550Mhz Pentium III.
+They were calculated with a 550Mhz Pentium III.
 
- * Input file: sanitized LANL-CM5-1994-3.1-cln.swf.gz
- * No. of job submissions: 110769
- * Run time: 2:47.21 minutes (167 seconds)
- * Jobs per second: 663
+ * Input: first 100,000 jobs from sanitized LANL-CM5-1994-3.1-cln.swf.gz
+ * Run time: 63.9 seconds
+ * Jobs per second: 1565
+ * Code revision: r223 (25 April, 2007)
 
 = Optimizations Done =
- * Use a heap in `EventQueue` instead of a sorted list
+ * Running with '`python -O`' (which [http://docs.python.org/ref/assert.html disables assertions])
+ * Using a heap in `EventQueue` instead of a sorted list
+ * Entering (timestamp, event) tuples into the heap to reduce calls to `JobEvent.__cmp__`
  * Parsing input fields lazily in `workload_parser.py`, only a few fields from the SWF format are used
- * Running with '`python -O`' (which disables asserts)
    * One assert was especially painful: verifying the event hasn't been entered before in `EventQueue.add_event`, it took almost %80 of the run time
-   * We may be interested in keeping most of the asserts even in a production run, how can we do this easily?
+
+= Possible Optimizations =
+ * In `EventQueue`, use a heap with better performance on partially-sorted data (like our events)
+   * Such as Raymond Hettinger's [http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277553 Two-pass Pairing Heap with Multipass Auxiliary List]
+   * Choose when to insert maintaining heap (`O(log(heap_size)) * no. of pushes`) and when to append several items and then heapify (`O(heap_size) + no. of pushes`)
 
 = TODO =
-It would be nice to keep slow asserts during development, and remove them only on "production" runs, e.g. with 'python -O' ([http://docs.python.org/ref/assert.html disables assertions]).
+ * We may be interested in keeping most of the asserts even in a production run, how can we do this easily?
