@@ -6,7 +6,9 @@ These optimizations were all driven by profiler runs.
 
 = Current Performance =
 
-They were calculated with a 550Mhz Pentium III.
+To measure the run time yourself, try '`./time_simulator < input`' in the '`prototype01/`' subdirectory.
+
+These measurements were done on a 550Mhz Pentium III running Linux.
 
  * Input: first 100,000 jobs from sanitized LANL-CM5-1994-3.1-cln.swf.gz
  * Run time: 63.9 seconds
@@ -24,6 +26,11 @@ They were calculated with a 550Mhz Pentium III.
  * In `EventQueue`, use a heap with better performance on partially-sorted data (like our events)
    * Such as Raymond Hettinger's [http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277553 Two-pass Pairing Heap with Multipass Auxiliary List]
    * Choose when to insert maintaining heap (`O(log(heap_size)) * no. of pushes`) and when to append several items and then heapify (`O(heap_size) + no. of pushes`)
+
+= Failed Optimizations =
+ * Use '`__slots__`' on classes with numerous instances
+   * Timing has shown a meager %2 run time reduction with `__slots__` on classes `Job` and `JobEvent`
+    * When explicitly setting `__slots__` on `JobEvent` subclasses, performance got drastically worse :-/ (dunno why)
 
 = TODO =
  * We may be interested in keeping most of the asserts even in a production run, how can we do this easily?
