@@ -24,6 +24,7 @@ These measurements were done on a 550Mhz Pentium III running Linux.
    * One assert was especially painful: verifying the event hasn't been entered before in `EventQueue.add_event`, it took almost %80 of the run time
 
 = Possible Optimizations =
+ * Currently all the job submission events are entered into the queue in `Simulator.__init__`, which causes every event queue operation to be slow (many events in the queue). The job submission events are already sorted - we can enter them as needed, when the queue reaches a relevant timestamp, and keep it small this way.
  * In `EventQueue`, use a heap with better performance on partially-sorted data (like our events)
    * Such as Raymond Hettinger's [http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277553 Two-pass Pairing Heap with Multipass Auxiliary List]
    * Choose when to insert maintaining heap (`O(log(heap_size)) * no. of pushes`) and when to append several items and then heapify (`O(heap_size) + no. of pushes`)
