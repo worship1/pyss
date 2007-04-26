@@ -11,12 +11,13 @@ To measure the run time yourself, try '`./time_simulator < input`' in the '`prot
 These measurements were done on a 550Mhz Pentium III running Linux.
 
  * Input: first 100,000 jobs from sanitized LANL-CM5-1994-3.1-cln.swf.gz
- * Run time: 63.9 seconds
- * Jobs per second: 1565
- * Code revision: r223 (25 April, 2007)
+ * Run time: 55.0 seconds
+ * Jobs per second: 1818
+ * Code revision: r228 (27 April, 2007)
 
 = Optimizations Done =
  * Running with '`python -O`' (which [http://docs.python.org/ref/assert.html disables assertions])
+   * Also, replacing 'if...: raise ...' with straight assertions in bottlenecks, so '`python -O`' will disable them too
  * Using a heap in `EventQueue` instead of a sorted list
  * Entering (timestamp, event) tuples into the heap to reduce calls to `JobEvent.__cmp__`
  * Parsing input fields lazily in `workload_parser.py`, only a few fields from the SWF format are used
