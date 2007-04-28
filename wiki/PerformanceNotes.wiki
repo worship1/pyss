@@ -11,17 +11,19 @@ To measure the run time yourself, try '`./time_simulator < input`' in the '`prot
 These measurements were done on a 550Mhz Pentium III running Linux.
 
  * Input: first 100,000 jobs from sanitized LANL-CM5-1994-3.1-cln.swf.gz
- * Run time: 53.8 seconds
- * Jobs per second: 1859
- * Code revision: r230 (27 April, 2007)
+ * Run time: 40.7 seconds
+ * Jobs per second: 2457
+ * Code revision: r233 (28 April, 2007)
 
 = Optimizations Done =
  * Running with '`python -O`' (which [http://docs.python.org/ref/assert.html disables assertions])
+   * One assert was especially painful: verifying the event hasn't been entered before in `EventQueue.add_event`, it took almost %80 of the run time
    * Also, replacing 'if...: raise ...' with straight assertions in bottlenecks, so '`python -O`' will disable them too
  * Using a heap in `EventQueue` instead of a sorted list
  * Entering (timestamp, event) tuples into the heap to reduce calls to `JobEvent.__cmp__`
- * Parsing input fields lazily in `workload_parser.py`, only a few fields from the SWF format are used
-   * One assert was especially painful: verifying the event hasn't been entered before in `EventQueue.add_event`, it took almost %80 of the run time
+ * Input parsing:
+   * ~~Parsing input fields lazily in `workload_parser.py`, only a few fields from the SWF format are used~~
+   * Hard-coded (and hard to work with) parsing of input lines, saves a lot of time (function calls + logic) (r233)
 
 = Possible Optimizations =
  * Currently all the job submission events are entered into the queue in `Simulator.__init__`, which causes every event queue operation to be slow (many events in the queue). The job submission events are already sorted - we can enter them as needed, when the queue reaches a relevant timestamp, and keep it small this way.
@@ -277,3 +279,4 @@ These measurements were done on a 550Mhz Pentium III running Linux.
         1    0.000    0.000    0.000    0.000 prototype.py:15(JobSubmitEvent)
         0    0.000             0.000          profile:0(profiler)
 }}}
+
